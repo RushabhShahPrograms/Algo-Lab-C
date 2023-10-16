@@ -126,3 +126,13 @@ int main() {
     printf("\n");
     return 0;
 }
+
+
+/*
+Enter the number of integers (n): 6
+Enter the number of digits per integer (m): 2
+Unsorted Array:
+28 35 76 63 61 71 
+Sorted Array:
+28 35 61 63 71 76 
+*/
