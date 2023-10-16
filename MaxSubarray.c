@@ -1,30 +1,60 @@
 #include <stdio.h>
+#include <limits.h>
 
-int maxSubArray(int arr[], int size) {
-    int max_sum = arr[0];
-    int current_sum = arr[0];
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
 
-    for (int i = 1; i < size; i++) {
-        if (arr[i] > current_sum + arr[i]) {
-            current_sum = arr[i];
-        } else {
-            current_sum = current_sum + arr[i];
-        }
+int maxCrossingSubarray(int arr[], int low, int mid, int high) {
+    int leftSum = INT_MIN;
+    int sum = 0;
+    int i;
 
-        if (current_sum > max_sum) {
-            max_sum = current_sum;
+    for (i = mid; i >= low; i--) {
+        sum += arr[i];
+        if (sum > leftSum) {
+            leftSum = sum;
         }
     }
 
-    return max_sum;
+    int rightSum = INT_MIN;
+    sum = 0;
+
+    for (i = mid + 1; i <= high; i++) {
+        sum += arr[i];
+        if (sum > rightSum) {
+            rightSum = sum;
+        }
+    }
+
+    return leftSum + rightSum;
+}
+
+int maxSubarray(int arr[], int low, int high) {
+    if (low == high) {
+        return arr[low];
+    }
+
+    int mid = (low + high) / 2;
+
+    int leftSum = maxSubarray(arr, low, mid);
+    int rightSum = maxSubarray(arr, mid + 1, high);
+    int crossSum = maxCrossingSubarray(arr, low, mid, high);
+
+    return max(max(leftSum, rightSum), crossSum);
 }
 
 int main() {
-    int arr[] = {-2, 1, -3, 4, -1, 2, -1, -5, -4};
-    int size = sizeof(arr) / sizeof(arr[0]);
-    int result = maxSubArray(arr, size);
+    int arr[] = {-2, -5, 6, -2, 3, 1, 5, -6};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("Maximum subarray sum: %d\n", result); // Output: 6 (corresponding to the subarray [4, -1, 2, 1])
+    int maxSubArray = maxSubarray(arr, 0, n - 1);
 
-return 0;
+    printf("Maximum subarray sum is: %d\n", maxSubArray);
+
+    return 0;
 }
+
+/*
+Maximum subarray sum is: 13
+*/
