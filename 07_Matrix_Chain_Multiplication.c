@@ -40,7 +40,7 @@ int MatrixChainOrder(int p[], int n)
 
 int main() 
 { 
-	int arr[] = { 1, 2, 3, 4}; 
+	int arr[] = { 1, 2, 3, 4 }; 
 	int size = sizeof(arr) / sizeof(arr[0]); 
 
 	printf("Minimum number of multiplications is %d ", 
@@ -49,6 +49,7 @@ int main()
 	getchar(); 
 	return 0; 
 } 
+
 
 
 /*
