@@ -39,3 +39,8 @@ int main()
 	printMaxActivities(s, f, n);
 	return 0;
 }
+
+/*
+Following activities are selected
+0 1 3 4 
+*/
